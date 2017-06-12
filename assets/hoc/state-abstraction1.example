@@ -1,0 +1,31 @@
+const hoveringHOC = WrappedComponent =>
+  class HoveringComponent extends Component {
+    constructor(...args) {
+      super(...args);
+      this.state = {
+        hovering: false,
+      };
+
+      this.onMouseOver = this.onMouseOver.bind(this);
+      this.onMouseOut = this.onMouseOut.bind(this);
+    }
+
+    onMouseOver() {
+      this.setState({ hovering: true });
+    }
+
+    onMouseOut() {
+      this.setState({ hovering: false });
+    }
+
+    render() {
+      return (
+        <WrappedComponent
+          hovering={this.state.hovering}
+          onMouseOver={this.onMouseOver}
+          onMouseOut={this.onMouseOut}
+          {...this.props}
+        />
+      );
+    }
+  };

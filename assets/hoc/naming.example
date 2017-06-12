@@ -1,0 +1,14 @@
+HOC.displayName = `HOC(${getDisplayName(WrappedComponent)})`
+//or
+class HOC extends ... {
+  static displayName = `HOC(${getDisplayName(WrappedComponent)})`
+  ...
+}
+ ...
+
+The getDisplayName function is defined as follows:
+function getDisplayName(WrappedComponent) {
+  return WrappedComponent.displayName ||
+         WrappedComponent.name ||
+         ‘Component’
+}

@@ -1,0 +1,38 @@
+class Button extends Component {
+  constructor(...args) {
+    super(...args);
+    this.state = {
+      clicked: false,
+    };
+
+    this.onClick = this.onClick.bind(this);
+  }
+
+  onClick() {
+    this.setState({ clicked: true });
+  }
+
+  render() {
+    const { hovering, ...props } = this.props;
+    return (
+      <button
+        onClick={this.onClick}
+        style={{ color: hovering ? 'blue' : '#666666' }}
+        {...props}
+      >
+        {this.state.clicked ? 'been clicked' : 'click me'}
+      </button>
+    );
+  }
+}
+
+const Label = ({ hovering, text, ...props }) => {
+  return (
+    <label {...props} style={{ fontSize: hovering ? 14 : 12 }}>
+      {text}
+    </label>
+  );
+};
+
+const HoverButton = hoveringHOC(Button);
+const HoverLabel = hoveringHOC(Label);

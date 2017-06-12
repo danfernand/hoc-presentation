@@ -1,0 +1,23 @@
+const debugMixin = {
+  log(text) {
+    console.log(text, new Date().toISOString())
+  }
+  componentWillMount: () => {
+    this.log('componentWillMount')
+  },
+  componentWillUnmount: () => {
+    this.log('componentWillUnmount')
+  },
+};
+
+const SomeComponent = React.createClass({
+  mixins: [debugMixin],
+  componentWillMount: () => {
+    // do something, executed after all mixin's componentWillMount
+  },
+  render: () => {
+    return (
+      <div>{ 'some text' }</div>
+    )
+  }
+});

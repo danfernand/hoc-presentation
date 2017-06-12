@@ -1,0 +1,27 @@
+class HoveringFAC extends Component {
+  constructor(...args) {
+    super(...args);
+    this.state = {
+      hovering: false,
+    };
+
+    this.onMouseOver = this.onMouseOver.bind(this);
+    this.onMouseOut = this.onMouseOut.bind(this);
+  }
+
+  onMouseOver() {
+    this.setState({ hovering: true });
+  }
+
+  onMouseOut() {
+    this.setState({ hovering: false });
+  }
+
+  render() {
+    return this.props.children(
+      this.onMouseOver,
+      this.onMouseOut,
+      this.state.hovering,
+    );
+  }
+}

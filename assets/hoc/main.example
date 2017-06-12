@@ -1,0 +1,33 @@
+const debuggableHOC = WrappedComponent =>
+  class Debuggable extends WrappedComponent {
+    constructor(props) {
+      super(props);
+    }
+    log(text) {
+      console.log(text, new Date().toISOString());
+    }
+    componentWillMount() {
+      super.componentWillMount();
+      this.log('componentWillMount');
+    }
+    componentWillUnmount() {
+      super.componentWillMount();
+      this.log('componentWillMount');
+    }
+    render() {
+      return super.render();
+    }
+  };
+
+class SomeComponent extends React.Component {
+  componentWillMount: () => {
+    // do something, in this example called first
+  },
+  render: () => {
+    return (
+      <div>{ 'some text' }</div>
+    )
+  }
+}
+
+DebuggableSomeComponent = debuggableHOC(SomeComponent)

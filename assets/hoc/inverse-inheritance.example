@@ -1,0 +1,34 @@
+const authorizationHOC = WrappedComponent =>
+  class Enhancer extends WrappedComponent {
+    render() {
+      if (this.props.isAuthorized) {
+        return super.render();
+      }
+      return (
+        <div>
+          {'you are not authorized for this component'}
+        </div>
+      );
+    }
+  };
+
+const Component1 = ({ isAuthorized }) => {
+  return (
+    <div>
+      {'beep boop im a functional component'}
+    </div>
+  );
+};
+
+class Component2 extends Component {
+  render() {
+    return (
+      <div>
+        {'pop bang, im a classical component'}
+      </div>
+    );
+  }
+}
+
+const AuthorizedComponent1 = authorizationHOC(Component1);
+const AuthorizedComponent2 = authorizationHOC(Component2);
